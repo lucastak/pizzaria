@@ -6,14 +6,20 @@ interface CategoryRequest {
 
 class CreateCategoryService {
   async execute({ name }: CategoryRequest) {
-    // if (name === "") {
-    //   throw new Error("Name invalid");
-    // }
+    const listAlreadyExists = await prismaClient.category.findFirst({
+      where: {
+        name: name,
+      },
+    });
 
     const validators = [
       {
         condition: name.length === 0,
-        message: "valor inválido",
+        message: "Category invalid",
+      },
+      {
+        condition: listAlreadyExists,
+        message: "Category already exist",
       },
     ];
 
