@@ -8,12 +8,12 @@ import { CreateCategoryController } from "./controllers/category/CreateCategoryC
 
 const router = Router();
 
+// rotas de usuario
 router.post("/users", new CreateUserController().handle);
-
 router.post("/session", new AuthUserController().handle);
-
 router.get("/me", isAuhenticated, new DetailUserController().handle);
 
+//rotas de categoria
 router.post("/category", isAuhenticated, new CreateCategoryController().handle);
 
 export { router };
