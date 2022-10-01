@@ -13,6 +13,7 @@ import { CreateProductController } from "./controllers/product/CreateProductCont
 import { ListByCategoryController } from "./controllers/product/ListByCategoryController";
 
 import uploadConfig from "./config/multer";
+import { CreateOrderController } from "./controllers/order/CreateOrderController";
 
 const router = Router();
 
@@ -40,5 +41,8 @@ router.get(
   isAuhenticated,
   new ListByCategoryController().handle
 );
+
+//order
+router.post("/order", isAuhenticated, new CreateOrderController().handle);
 
 export { router };
