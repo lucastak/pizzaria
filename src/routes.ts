@@ -1,10 +1,11 @@
 import { Router } from "express";
 import multer from "multer";
 
+import { isAuhenticated } from "./middlewares/isAuthenticated";
+
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
-import { isAuhenticated } from "./middlewares/isAuthenticated";
 
 import { CreateCategoryController } from "./controllers/category/CreateCategoryController";
 import { ListCategoryController } from "./controllers/category/ListCategoryController";
@@ -16,6 +17,7 @@ import { CreateOrderController } from "./controllers/order/CreateOrderController
 import { RemoveOrderController } from "./controllers/order/RemoveOrderController";
 import { AddItemController } from "./controllers/order/AddItemController";
 import { RemoveItemController } from "./controllers/order/RemoveItemController";
+import { SendOrderController } from "./controllers/order/SendOrderController";
 
 import uploadConfig from "./config/multer";
 
@@ -56,5 +58,7 @@ router.delete(
   isAuhenticated,
   new RemoveItemController().handle
 );
+
+router.put("/order/send", isAuhenticated, new SendOrderController().handle);
 
 export { router };
